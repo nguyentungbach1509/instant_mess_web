@@ -1,0 +1,1 @@
+export const ROOM_CONFIG = "ROOM_CONFIG";

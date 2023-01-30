@@ -1,0 +1,39 @@
+.typing__mess__container {
+    display: inline-block;
+    position: relative;
+    background-color:blue;
+    border-radius:8px; 
+    width: 50px;
+    height: 30px;
+    
+  }
+  .typing__mess__container div {
+    display: inline-block;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color:rgb(156, 163, 175);
+    animation: typing__mess__container 1.2s cubic-bezier(0, 0.5, 0.75, 1) infinite;
+  }
+  .typing__mess__container div:nth-child(1) {
+    left: 8px;
+    animation-delay: 0;
+  }
+  .typing__mess__container div:nth-child(2) {
+    left: 19px;
+    animation-delay: -0.12s;
+  }
+  .typing__mess__container div:nth-child(3) {
+    left: 30px;
+    animation-delay: -0.24s;
+  }
+  @keyframes typing__mess__container {
+    0% {
+      top: 5px;
+    }
+    50%, 100% {
+      top: 12px;
+      
+    }
+  }
