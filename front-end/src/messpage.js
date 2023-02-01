@@ -13,6 +13,7 @@ import addimg_icon from './icons/add-image.png';
 import voicemess_icon from './icons/voice-message.png';
 import Modal from './modals/modal';
 import UploadImgModal from './modals/upload_img_modal';
+import VoiceModal from './modals/voice_chat_modal';
 
 
 const socket = io.connect("http://localhost:3001");
@@ -29,7 +30,8 @@ function MessPage(props) {
     const [members, setMemebers] = useState([]);
     const [typing, setTyping] = useState([]);
     const [addimg, setAddImg] = useState(false);
-    
+    const [voiceModal, setVoiceModal] = useState(false);
+
 
     const sendMess = (e) => {
         e.preventDefault();
@@ -68,6 +70,15 @@ function MessPage(props) {
     const openModalImg = (e) => {
         e.preventDefault();
         setAddImg(true);
+    }
+
+    const openVoiceModal = (e) => {
+        e.preventDefault();
+        setVoiceModal(true);
+    }
+
+    const closeVoiceModal = () => {
+        setVoiceModal(false);
     }
     
     const joinModal = () => {
@@ -163,7 +174,9 @@ function MessPage(props) {
                                     <p className='text-gray-800 font-medium text-sm'style={{textAlign: props.user.name === m.name && "right"}}>{m.name}</p>
                                     <div style={{backgroundColor: props.user.name === m.name ? "greenyellow" : "blue", borderRadius:"8px", width:"fit-content", 
                                     padding:"10px 15px"}}>
-                                        {!m.text ?  (<img src={m.img}/>) : m.text}
+                                        {m.text && m.text}
+                                        {m.img && (<img src={m.img}/>)}
+                                        {m.voice && (<audio controls src={m.voice}/>)}
                                     </div>
                                 </div>
                             ))
@@ -192,7 +205,7 @@ function MessPage(props) {
                                 <button className='p-0.5 rounded-sm text-gray-800  flex justify-center h-1/2' onClick={openModalImg} title="Upload Image">
                                     <img className="object-cover h-10 w-10 aspect-square" src={addimg_icon}/>
                                 </button>
-                                <button className='p-0.5 rounded-sm text-gray-800  flex justify-center h-1/2' title="Voice Chat">
+                                <button className='p-0.5 rounded-sm text-gray-800  flex justify-center h-1/2' onClick={openVoiceModal} title="Voice Chat">
                                     <img className="object-cover h-10 w-10 aspect-square" src={voicemess_icon}/>
                                 </button>
                             </div> 
@@ -230,6 +243,7 @@ function MessPage(props) {
             
             {openModal && (<Modal type={type} closeModal={closeModal}/>)}
             {addimg && (<UploadImgModal closeModalImg={closeModalImg} roomSelected={roomSelected}/>)}
+            {voiceModal && (<VoiceModal closeVoiceModal={closeVoiceModal} roomSelected={roomSelected}/>)}
         </div>
     );
 }

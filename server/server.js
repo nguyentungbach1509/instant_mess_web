@@ -75,7 +75,7 @@ io.on("connection", async (socket) => {
             name:data.name,
             text: data.text,
             img: data.img,
-            voice:null
+            voice: data.voice
         }, async (err, mess) => {
             if(err) {
                 console.log(err);
